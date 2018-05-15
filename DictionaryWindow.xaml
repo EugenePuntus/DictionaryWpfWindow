@@ -1,0 +1,48 @@
+﻿<Window x:Class="DictionaryWpfWindow.DictionaryWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DictionaryWpfWindow"
+        mc:Ignorable="d"
+        Title="{Binding Path=Name, StringFormat=Справочник {0}}" Height="256.829" Width="335.854"
+        MinHeight="350" MinWidth="500"
+        Loaded="DictionaryWindow_OnLoaded" x:Name="DictWindow"
+        WindowStartupLocation="CenterScreen">
+    <Window.Resources>
+        <Image x:Key="SaveImg" Source="Images/travelsoft_save.png" Width="24"/>
+        <Image x:Key="RefreshImg" Source="Images/travelsoft_refresh.png" Width="24"/>
+        <Image x:Key="RemoveImg" Source="Images/travelsoft_remove.png" Width="24"/>
+        <Image x:Key="EditImg" Source="Images/travelsoft_edit.png" Width="24"/>
+        <Image x:Key="ExitImg" Source="Images/travelsoft_exit.png" Width="24"/>
+        <Image x:Key="AddImg" Source="Images/travelsoft_add.png" Width="24"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="150*"/>
+        </Grid.RowDefinitions>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Stretch" Margin="10,10,9.6,5.2" VerticalAlignment="Stretch" Grid.ColumnSpan="2">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="42"/>
+                    <ColumnDefinition Width="42"/>
+                    <ColumnDefinition Width="42"/>
+                    <ColumnDefinition Width="490*"/>
+                </Grid.ColumnDefinitions>
+                <Button Content="{StaticResource AddImg}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="32" Height="32" Grid.Column="0" Click="Add_Click"/>
+                <Button x:Name="SaveButton" Content="{StaticResource SaveImg}" HorizontalAlignment="Left" Margin="5,5,0,0" VerticalAlignment="Top" Width="32" Height="32" Grid.Column="1" Click="Save_Click"/>
+                <Button Content="{StaticResource RefreshImg}" HorizontalAlignment="Left" Margin="5,5,0,5" Grid.Column="2" Width="32" Height="32" Click="Refresh_OnClick"/>
+                <Button Content="{StaticResource ExitImg}" HorizontalAlignment="Right" Margin="5,5,5,5" Grid.Column="3" Width="32" Height="32" Click="Exit_OnClick"/>
+            </Grid>
+        </Border>
+
+        <DataGrid x:Name="DictGrid" HorizontalAlignment="Stretch" Margin="10,4.8,9.6,10.4" Grid.Row="1" VerticalAlignment="Stretch" Grid.ColumnSpan="2"
+                  CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding Path=Data, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                  AutoGenerateColumns="False" Loaded="InitializeColumn" CellEditEnding="DictGrid_OnCellEditEnding">
+        </DataGrid>
+
+    </Grid>
+</Window>
